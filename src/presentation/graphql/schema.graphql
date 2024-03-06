@@ -1,0 +1,25 @@
+type LibraryTrackResult {
+  id: Int!
+  name: String!
+}
+
+type LibraryTrackResults {
+  tracks: [LibraryTrackResult]!
+}
+
+type LibraryTrackError {
+  message: String!
+}
+
+union LibraryTrackResponse = LibraryTrackError | LibraryTrackResult
+union LibraryTracksResponse = LibraryTrackError | LibraryTrackResults
+
+type Query {
+  libraryTrack(trackId: Int!): LibraryTrackResponse!
+  libraryTracks(trackIds: [Int], name: String): LibraryTracksResponse!
+}
+
+type Mutation {
+  createLibraryTrack(name: String!): LibraryTrackResponse!
+  deleteLibraryTrack(trackId: Int): LibraryTrackResponse!
+}
